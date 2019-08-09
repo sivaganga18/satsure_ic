@@ -4,6 +4,8 @@ import { Scene, Router } from "react-native-router-flux";
 import Login from "./src/components/Scenes/Login";
 import Portfolio from "./src/components/Scenes/Portfolio";
 
+console.disableYellowBox = true;
+
 export default class App extends Component {
   render() {
     return (

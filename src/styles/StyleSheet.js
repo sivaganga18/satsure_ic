@@ -5,9 +5,13 @@ export const { width, height } = Dimensions.get("window");
 export const colors = {
   white: "#fff",
   textPrimaryDrak: "#161F3D",
+  textSecondaryLight: "#757575",
   textFieldBackground: "#F1F5F7",
   textFieldBorder: "#EEEEEE",
-  orange: "#FF9F5E"
+  orange: "#FF9F5E",
+  drakGreen: "#116366",
+  statusGreen: "#084D50",
+  borderColor: "rgba(41,121,255,.2)"
 };
 
 export const fonts = {
@@ -17,6 +21,7 @@ export const fonts = {
 };
 
 export const fontSizes = {
+  xlarge: { fontSize: 22 }, //18
   large: { fontSize: 18 }, //18
   medium: { fontSize: 16 }, //16
   regular: { fontSize: 14 }, //14
