@@ -12,7 +12,10 @@ export const colors = {
   drakGreen: "#116366",
   statusGreen: "#084D50",
   borderColor: "rgba(41,121,255,.2)",
-  borderColorGray: "rgba(151,151,151,1,.2)"
+  borderColorGray: "rgba(151,151,151,1)",
+  blue: "#2979FF",
+  red: "#BE4141",
+  yellow: "#FFE08D"
 };
 
 export const fonts = {

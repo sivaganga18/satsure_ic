@@ -6,6 +6,7 @@ import Drawer from "react-native-drawer";
 import { colors } from "../../styles/StyleSheet";
 import SideMenuBar from "../Common/SideMenuBar";
 import CustomStatusBar from "../Common/CustomStatusBar";
+import { Actions } from "react-native-router-flux";
 
 export default class Portfolio extends Component {
   constructor(props) {
@@ -83,7 +84,12 @@ export default class Portfolio extends Component {
           {/* Header */}
 
           {/* Layout */}
-          <PortfolioLayout portfolioData={[{}, {}, {}, {}, {}, {}, {}, {}]} />
+          <PortfolioLayout
+            portfolioData={[{}, {}, {}, {}, {}, {}, {}, {}]}
+            callback={() => {
+              Actions.harvest();
+            }}
+          />
           {/* Layout */}
         </Drawer>
       </View>

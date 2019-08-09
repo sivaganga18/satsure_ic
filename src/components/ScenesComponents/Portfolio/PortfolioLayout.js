@@ -6,7 +6,7 @@ import { Custompadding } from "../../../styles/StyleSheet";
 
 export default class PortfolioLayout extends Component {
   render() {
-    const { portfolioData } = this.props;
+    const { portfolioData, callback } = this.props;
     return (
       <View
         style={[
@@ -29,7 +29,9 @@ export default class PortfolioLayout extends Component {
             {map(portfolioData, (portfolio, key) => {
               return (
                 <PortfolioCard
-                  callback={() => {}}
+                  callback={() => {
+                    callback();
+                  }}
                   image={require("../../../assets/images/avg_money.png")}
                   subTitle="Low Potential"
                   title="7,00,000"
