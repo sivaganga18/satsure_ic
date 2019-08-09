@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import AppHeader from "../Common/AppHeader";
 import PortfolioLayout from "../ScenesComponents/Portfolio/PortfolioLayout";
+import Drawer from "react-native-drawer";
+import { colors } from "../../styles/StyleSheet";
+import SideMenuBar from "../Common/SideMenuBar";
+import CustomStatusBar from "../Common/CustomStatusBar";
 
 export default class Portfolio extends Component {
   constructor(props) {
@@ -18,38 +22,70 @@ export default class Portfolio extends Component {
   showMenu = () => {
     this._menu.show();
   };
+
+  closeDrawer = () => {
+    this._drawer.close();
+  };
+  openDrawer = () => {
+    this._drawer.open();
+  };
   render() {
     const { menuTitle } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        {/* Header */}
-        <AppHeader
-          leftIcon={require("../../assets/images/hamburger.png")}
-          leftIconCallback={() => {}}
-          title="Priority Portfolio"
-          menuCallback={() => {
-            this.showMenu();
+        <Drawer
+          tapToClose={true}
+          openDrawerOffset={0.4}
+          panCloseMask={0.2}
+          styles={{
+            drawer: {
+              backgroundColor: colors.white
+            },
+            mainOverlay: {
+              backgroundColor: "black",
+              opacity: 0
+            }
           }}
-          menuListCallback={value => {
-            this.hideMenu(value);
-          }}
-          menuTitle={menuTitle}
-          menuRef={ref => {
-            this._menu = ref;
-          }}
-          menuList={[
-            { value: "Whitefield" },
-            { value: "Kasthuri Nagar" },
-            { value: "Hebbal" },
-            { value: "Hosur" }
-          ]}
-          showMenu={true}
-        />
-        {/* Header */}
+          tweenHandler={ratio => ({
+            mainOverlay: {
+              opacity: ratio / 2
+            }
+          })}
+          content={<SideMenuBar title="SIva" />}
+          ref={ref => (this._drawer = ref)}
+          type="overlay"
+        >
+          {/* Header */}
+          <AppHeader
+            leftIcon={require("../../assets/images/hamburger.png")}
+            leftIconCallback={() => {
+              this.openDrawer();
+            }}
+            title="Priority Portfolio"
+            menuCallback={() => {
+              this.showMenu();
+            }}
+            menuListCallback={value => {
+              this.hideMenu(value);
+            }}
+            menuTitle={menuTitle}
+            menuRef={ref => {
+              this._menu = ref;
+            }}
+            menuList={[
+              { value: "Whitefield" },
+              { value: "Kasthuri Nagar" },
+              { value: "Hebbal" },
+              { value: "Hosur" }
+            ]}
+            showMenu={true}
+          />
+          {/* Header */}
 
-        {/* Layout */}
-        <PortfolioLayout portfolioData={[{}, {}, {}, {}, {}, {}, {}, {}]} />
-        {/* Layout */}
+          {/* Layout */}
+          <PortfolioLayout portfolioData={[{}, {}, {}, {}, {}, {}, {}, {}]} />
+          {/* Layout */}
+        </Drawer>
       </View>
     );
   }

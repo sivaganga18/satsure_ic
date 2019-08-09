@@ -11,7 +11,8 @@ export const colors = {
   orange: "#FF9F5E",
   drakGreen: "#116366",
   statusGreen: "#084D50",
-  borderColor: "rgba(41,121,255,.2)"
+  borderColor: "rgba(41,121,255,.2)",
+  borderColorGray: "rgba(151,151,151,1,.2)"
 };
 
 export const fonts = {
