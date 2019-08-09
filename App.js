@@ -4,6 +4,7 @@ import { Scene, Router } from "react-native-router-flux";
 import Login from "./src/components/Scenes/Login";
 import Portfolio from "./src/components/Scenes/Portfolio";
 import Harvest from "./src/components/Scenes/Harvest";
+import LocationMap from "./src/components/Scenes/LocationMap";
 
 console.disableYellowBox = true;
 
@@ -31,6 +32,13 @@ export default class App extends Component {
             hideNavBar={true}
             component={Harvest}
             title="Harvest"
+            panHandlers={null}
+          />
+          <Scene
+            key="location"
+            hideNavBar={true}
+            component={LocationMap}
+            title="LocationMap"
             panHandlers={null}
           />
         </Scene>

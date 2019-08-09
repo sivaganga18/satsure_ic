@@ -56,7 +56,12 @@ export default class Harvest extends Component {
         {/* Header */}
 
         {/* Layout */}
-        <HarvestLayout harvestData={[{}, {}, {}, {}, {}]} callback={() => {}} />
+        <HarvestLayout
+          harvestData={[{}, {}, {}, {}, {}]}
+          callback={() => {
+            Actions.location();
+          }}
+        />
         {/* Layout */}
       </View>
     );
