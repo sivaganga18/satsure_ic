@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Dimensions } from "react-native";
 import AppHeader from "../Common/AppHeader";
 import { Actions } from "react-native-router-flux";
 import LocationLayout from "../ScenesComponents/Location/LocationLayout";
 import Button from "../Common/Button";
 import { remove } from "lodash";
+import LocationModal from "../ScenesComponents/Location/LocationModal";
+
+const width = Dimensions.get("window").width;
 
 let id = 0;
 
@@ -16,7 +19,8 @@ export default class LocationMap extends Component {
       editing: null,
       creatingHole: false,
       isEdit: false,
-      selectedPolygon: null
+      selectedPolygon: null,
+      modalVisible: false
     };
   }
 
@@ -74,7 +78,7 @@ export default class LocationMap extends Component {
   }
 
   render() {
-    const { polygons, isEdit, editing } = this.state;
+    const { polygons, isEdit, editing, modalVisible } = this.state;
     return (
       <View style={{ flex: 1 }}>
         {/* Header */}
@@ -95,7 +99,8 @@ export default class LocationMap extends Component {
             this.onPress(e);
           }}
           selectedPolygonCallback={id => {
-            this.setState({ selectedPolygon: id });
+            // this.setState({ selectedPolygon: id });
+            this.setState({ modalVisible: true });
           }}
           editing={editing}
           editCallback={() => {
@@ -109,17 +114,23 @@ export default class LocationMap extends Component {
 
         {/* Bottom */}
         {isEdit && editing !== null ? (
-          <Button
-            buttonText="SAVE"
-            callback={() => {
-              this.finish();
-            }}
-            noMargin={true}
-          />
+          <View style={{ position: "absolute", width: width, bottom: 0 }}>
+            <Button
+              buttonText="SAVE"
+              callback={() => {
+                this.finish();
+              }}
+              noMargin={true}
+            />
+          </View>
         ) : (
           <View />
         )}
         {/* Bottom */}
+
+        {/* LocationModal */}
+        <LocationModal visible={modalVisible} />
+        {/* LocationModal */}
       </View>
     );
   }

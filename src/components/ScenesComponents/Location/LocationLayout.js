@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import MapView, { Polygon, ProviderPropType } from "react-native-maps";
 import LocationButton from "./UI/LocationButton";
+import { colors, typography } from "../../../styles/StyleSheet";
 
 let id = 0;
 
@@ -64,7 +65,27 @@ export default class LocationLayout extends Component {
         <LocationButton
           editCallback={editCallback}
           deleteCallback={deleteCallback}
+          showDelete={isEdit}
+          showFreez={isEdit}
         />
+        {isEdit ? (
+          <View style={{ position: "absolute", width: "100%" }}>
+            <View
+              style={{
+                height: 40,
+                backgroundColor: "rgba(0,0,0,0.8)",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Text style={[typography.regular.small, { color: colors.white }]}>
+                Draw a polygon on the area
+              </Text>
+            </View>
+          </View>
+        ) : (
+          <View />
+        )}
       </View>
     );
   }

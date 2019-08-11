@@ -4,7 +4,7 @@ import { colors } from "../../../../styles/StyleSheet";
 
 export default class RoundButton extends Component {
   render() {
-    const { callback } = this.props;
+    const { callback, image } = this.props;
     return (
       <TouchableOpacity
         onPress={callback}
@@ -17,10 +17,7 @@ export default class RoundButton extends Component {
           justifyContent: "center"
         }}
       >
-        <Image
-          style={{ width: 20, height: 20 }}
-          source={require("../../../../assets/images/edit.png")}
-        />
+        <Image style={{ width: 20, height: 20 }} source={image} />
       </TouchableOpacity>
     );
   }

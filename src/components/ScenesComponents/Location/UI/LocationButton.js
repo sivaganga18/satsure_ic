@@ -5,12 +5,38 @@ import RoundButton from "./RoundButton";
 
 export default class LocationButton extends Component {
   render() {
-    const { editCallback, deleteCallback } = this.props;
+    const {
+      editCallback,
+      deleteCallback,
+      freezCallback,
+      showDelete,
+      showFreez
+    } = this.props;
     return (
       <View style={{ position: "absolute", right: 16, top: 80 }}>
-        <RoundButton callback={editCallback} />
+        <RoundButton
+          image={require("../../../../assets/images/edit.png")}
+          callback={editCallback}
+        />
+        {showDelete ? (
+          <View style={{ paddingTop: 16 }}>
+            <RoundButton
+              image={require("../../../../assets/images/delete.png")}
+              callback={deleteCallback}
+            />
+          </View>
+        ) : (
+          <View />
+        )}
         <View style={{ paddingTop: 16 }}>
-          <RoundButton callback={deleteCallback} />
+          {showFreez ? (
+            <RoundButton
+              image={require("../../../../assets/images/delete.png")}
+              callback={freezCallback}
+            />
+          ) : (
+            <View />
+          )}
         </View>
       </View>
     );
