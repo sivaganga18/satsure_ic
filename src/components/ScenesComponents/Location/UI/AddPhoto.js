@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { typography, colors } from "../../../../styles/StyleSheet";
 import { map } from "lodash";
 
@@ -33,11 +33,15 @@ export default class AddPhoto extends Component {
                   width: 50,
                   height: 50,
                   borderRadius: 3,
-                  backgroundColor: "red",
                   marginRight: 8,
                   marginTop: 16
                 }}
-              />
+              >
+                <Image
+                  style={{ width: 50, height: 50 }}
+                  source={{ uri: photos.uri }}
+                />
+              </View>
             );
           })}
         </View>

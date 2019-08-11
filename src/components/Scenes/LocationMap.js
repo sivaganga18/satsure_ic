@@ -4,8 +4,12 @@ import AppHeader from "../Common/AppHeader";
 import { Actions } from "react-native-router-flux";
 import LocationLayout from "../ScenesComponents/Location/LocationLayout";
 import Button from "../Common/Button";
-import { remove } from "lodash";
+import { remove, cloneDeep } from "lodash";
 import LocationModal from "../ScenesComponents/Location/LocationModal";
+import ImagePicker from "react-native-image-picker";
+import Permissions from "react-native-permissions";
+import moment from "moment";
+import DateTimePicker from "react-native-modal-datetime-picker";
 
 const width = Dimensions.get("window").width;
 
@@ -20,8 +24,58 @@ export default class LocationMap extends Component {
       creatingHole: false,
       isEdit: false,
       selectedPolygon: null,
-      modalVisible: false
+      modalVisible: false,
+      photoPermission: "",
+      imageArray: [],
+      isDateTimePickerVisible: false,
+      dateValue: ""
     };
+  }
+
+  componentDidMount() {
+    Permissions.check("photo").then(response => {
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({ photoPermission: response });
+    });
+  }
+
+  _requestPermission = () => {
+    debugger;
+    Permissions.request("photo").then(response => {
+      // Returns once the user has chosen to 'allow' or to 'not allow' access
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      this.setState({ photoPermission: response });
+    });
+  };
+
+  selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
+
+      if (response.didCancel) {
+        console.log("User cancelled photo picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        let source = { uri: response.uri };
+        let updateArray = cloneDeep(this.state.imageArray);
+        updateArray.push(source);
+        this.setState({
+          imageArray: updateArray
+        });
+      }
+    });
   }
 
   finish() {
@@ -77,8 +131,29 @@ export default class LocationMap extends Component {
     }
   }
 
+  handleDatePicked = date => {
+    let formateDate = moment(date).format("DD-MM-YYYY");
+    this.setState(
+      { dateValue: formateDate, isDateTimePickerVisible: false },
+      () => {
+        setTimeout(() => {
+          this.setState({ modalVisible: true });
+        }, 300);
+      }
+    );
+  };
+
   render() {
-    const { polygons, isEdit, editing, modalVisible } = this.state;
+    const {
+      polygons,
+      isEdit,
+      editing,
+      modalVisible,
+      photoPermission,
+      imageArray,
+      isDateTimePickerVisible,
+      dateValue
+    } = this.state;
     return (
       <View style={{ flex: 1 }}>
         {/* Header */}
@@ -129,8 +204,40 @@ export default class LocationMap extends Component {
         {/* Bottom */}
 
         {/* LocationModal */}
-        <LocationModal visible={modalVisible} />
+        <LocationModal
+          visible={modalVisible}
+          imageArray={imageArray}
+          imageCallback={() => {
+            if (photoPermission == "authorized") {
+              this.selectPhotoTapped();
+            } else {
+              this._requestPermission();
+            }
+          }}
+          closeCallback={() => {
+            this.setState({ modalVisible: false });
+          }}
+          proccedCallback={() => {
+            this.setState({ dateValue: "", modalVisible: false });
+          }}
+          dateCallback={() => {
+            debugger;
+            this.setState({ modalVisible: false }, () => {
+              setTimeout(() => {
+                this.setState({ isDateTimePickerVisible: true });
+              }, 300);
+            });
+          }}
+          dateValue={dateValue}
+        />
         {/* LocationModal */}
+        <DateTimePicker
+          isVisible={isDateTimePickerVisible}
+          onConfirm={this.handleDatePicked}
+          onCancel={() => {
+            this.setState({ isDateTimePickerVisible: false });
+          }}
+        />
       </View>
     );
   }

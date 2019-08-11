@@ -44,6 +44,7 @@ export default class LocationLayout extends Component {
               onPress={() => {
                 selectedPolygonCallback(polygon.id);
               }}
+              tappable={true}
               coordinates={polygon.coordinates}
               holes={polygon.holes}
               strokeColor="#F00"

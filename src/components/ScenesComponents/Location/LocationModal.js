@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Dimensions,
+  Image,
+  TouchableOpacity
+} from "react-native";
 import { colors, Custompadding, typography } from "../../../styles/StyleSheet";
 import Modal from "react-native-modal";
 import CustomTextField from "../../Common/CustomTextField";
@@ -10,8 +17,15 @@ const height = Dimensions.get("window").height;
 
 export default class LocationModal extends Component {
   render() {
-    const { visible } = this.props;
-    const photosArray = [{}, {}, {}, {}, {}, {}];
+    const {
+      visible,
+      imageCallback,
+      imageArray,
+      closeCallback,
+      proccedCallback,
+      dateCallback,
+      dateValue
+    } = this.props;
     return (
       <Modal isVisible={visible}>
         <View
@@ -37,26 +51,35 @@ export default class LocationModal extends Component {
                 Fill in the details
               </Text>
             </View>
-            <View>
+            <TouchableOpacity onPress={closeCallback}>
               <Image
                 style={{ width: 15, height: 15 }}
                 source={require("../../../assets/images/close.png")}
               />
-            </View>
+            </TouchableOpacity>
           </View>
           <ScrollView>
             <View>
               <CustomTextField title="Tehsil Name" />
               <CustomTextField title="Survey Number" />
               <CustomTextField title="Crop Name" />
-              <CustomTextField title="Harvest Date" />
-              <AddPhoto callback={() => {}} photosArray={photosArray} />
+              <CustomTextField
+                title="Harvest Date"
+                showTouchField={true}
+                callback={dateCallback}
+                value={dateValue}
+              />
+              <AddPhoto callback={imageCallback} photosArray={imageArray} />
               <CustomTextField title="Created Date" />
               <CustomTextField title="GPS Coordinates" />
             </View>
           </ScrollView>
           <View style={{ paddingTop: 16 }}>
-            <Button buttonText="SUBMIT" noMargin={true} />
+            <Button
+              buttonText="SUBMIT"
+              noMargin={true}
+              callback={proccedCallback}
+            />
           </View>
         </View>
       </Modal>
