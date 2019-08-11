@@ -32,6 +32,22 @@ export default class Portfolio extends Component {
   };
   render() {
     const { menuTitle } = this.state;
+    const menuList = [
+      {
+        title: "Performance Report",
+        callback: () => {
+          this._drawer.close(() => {
+            Actions.chart();
+          });
+        }
+      },
+      {
+        title: "Help"
+      },
+      {
+        title: "Logout"
+      }
+    ];
     return (
       <View style={{ flex: 1 }}>
         <Drawer
@@ -52,7 +68,7 @@ export default class Portfolio extends Component {
               opacity: ratio / 2
             }
           })}
-          content={<SideMenuBar title="SIva" />}
+          content={<SideMenuBar title="Siva" menuList={menuList} />}
           ref={ref => (this._drawer = ref)}
           type="overlay"
         >

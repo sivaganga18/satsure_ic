@@ -6,18 +6,7 @@ import { map } from "lodash";
 
 export default class SideMenuBar extends Component {
   render() {
-    const { title } = this.props;
-    const menuList = [
-      {
-        title: "Performance Report"
-      },
-      {
-        title: "Help"
-      },
-      {
-        title: "Logout"
-      }
-    ];
+    const { title, menuList } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <CustomStatusBar />

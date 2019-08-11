@@ -15,7 +15,11 @@ export const colors = {
   borderColorGray: "rgba(151,151,151,1)",
   blue: "#2979FF",
   red: "#BE4141",
-  yellow: "#FFE08D"
+  yellow: "#FFE08D",
+  pink: "#FA114F",
+  pinkLight: "rgba(233,30,99,0.2)",
+  blueMedium: "rgba(0,218,255,0.2)",
+  blueLight: "rgba(32,148,250,0.2)"
 };
 
 export const fonts = {
