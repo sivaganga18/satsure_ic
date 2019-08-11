@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { colors, typography } from "../../styles/StyleSheet";
 
 export default class CustomTextField extends Component {
   render() {
-    const { placeholder, title, showTouchField, callback, value } = this.props;
+    const {
+      placeholder,
+      title,
+      showTouchField,
+      callback,
+      value,
+      icon
+    } = this.props;
     return (
       <View>
         {title ? (
@@ -37,6 +44,30 @@ export default class CustomTextField extends Component {
               placeholder={placeholder}
               underlineColorAndroid="transparent"
             />
+            {icon ? (
+              <View
+                style={{
+                  position: "absolute",
+                  right: 8,
+                  height: 50,
+
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <Image
+                  resizeMode="contain"
+                  style={{
+                    width: 20,
+                    height: 20,
+                    backgroundColor: "transparent"
+                  }}
+                  source={icon}
+                />
+              </View>
+            ) : (
+              <View />
+            )}
           </View>
         </TouchableOpacity>
       </View>

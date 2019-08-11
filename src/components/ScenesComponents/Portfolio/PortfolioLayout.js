@@ -32,11 +32,19 @@ export default class PortfolioLayout extends Component {
                   callback={() => {
                     callback();
                   }}
-                  image={require("../../../assets/images/avg_money.png")}
-                  subTitle="Low Potential"
-                  title="7,00,000"
-                  lan="6500"
-                  elb="6500"
+                  image={
+                    portfolio.name == "Low Potential"
+                      ? require("../../../assets/images/low_money.png")
+                      : portfolio.name == "Avg Potential"
+                      ? require("../../../assets/images/avg_money.png")
+                      : portfolio.name == "High Potential"
+                      ? require("../../../assets/images/high_money.png")
+                      : require("../../../assets/images/total_money.png")
+                  }
+                  subTitle={portfolio.name}
+                  title={portfolio.amount}
+                  lan={portfolio.lan}
+                  elb={portfolio.elb}
                 />
               );
             })}

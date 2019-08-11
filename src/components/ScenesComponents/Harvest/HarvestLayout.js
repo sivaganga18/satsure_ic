@@ -13,7 +13,15 @@ export default class HarvestLayout extends Component {
         <ScrollView>
           <View style={{ paddingBottom: 16 }}>
             {map(harvestData, (harvest, key) => {
-              return <HarvestCard callback={callback} />;
+              return (
+                <HarvestCard
+                  code={harvest.assetCode}
+                  crops={harvest.crops}
+                  area={harvest.areaFinanced}
+                  date={harvest.harvestWindow}
+                  callback={callback}
+                />
+              );
             })}
           </View>
         </ScrollView>

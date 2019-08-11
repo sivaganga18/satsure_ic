@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-import { colors, typography } from "../../styles/StyleSheet";
+import { colors, typography, Custompadding } from "../../styles/StyleSheet";
 import CustomStatusBar from "./CustomStatusBar";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import { map } from "lodash";
@@ -17,6 +17,7 @@ export default class AppHeader extends Component {
       menuRef,
       menuList,
       rightIcon,
+      rightIconCallback,
       showMenu
     } = this.props;
     return (
@@ -88,16 +89,26 @@ export default class AppHeader extends Component {
                   return (
                     <MenuItem
                       onPress={() => {
-                        menuListCallback(menu.value);
+                        menuListCallback(menu.name);
                       }}
                     >
-                      {menu.value}
+                      {menu.name}
                     </MenuItem>
                   );
                 })}
               </Menu>
             ) : rightIcon ? (
-              <View />
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={rightIconCallback}
+                style={[Custompadding.paddingRegular]}
+              >
+                <Image
+                  resizeMode="contain"
+                  style={{ width: 18, height: 18 }}
+                  source={rightIcon}
+                />
+              </TouchableOpacity>
             ) : (
               <View />
             )}

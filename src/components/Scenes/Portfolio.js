@@ -8,11 +8,57 @@ import SideMenuBar from "../Common/SideMenuBar";
 import CustomStatusBar from "../Common/CustomStatusBar";
 import { Actions } from "react-native-router-flux";
 
+const dropDownList = [
+  {
+    name: "Akola",
+    id: 1
+  },
+  {
+    name: "Thane",
+    id: 2
+  },
+  {
+    name: "whitefield",
+    id: 3
+  }
+];
+
+const data = [
+  {
+    name: "Low Potential",
+    id: 1,
+    elb: 134729,
+    lan: 14,
+    amount: 109384
+  },
+  {
+    name: "Avg Potential",
+    id: 2,
+    elb: 16435,
+    lan: 12,
+    amount: 3689257
+  },
+  {
+    name: "High Potential",
+    id: 3,
+    elb: 39587,
+    lan: 24,
+    amount: 197446
+  },
+  {
+    name: "Total",
+    id: -1,
+    elb: 190751,
+    lan: 50,
+    amount: 3996087
+  }
+];
+
 export default class Portfolio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuTitle: "WhiteField"
+      menuTitle: dropDownList[0].name
     };
   }
   hideMenu = value => {
@@ -44,11 +90,19 @@ export default class Portfolio extends Component {
       },
       {
         title: "Help",
-        image: require("../../assets/images/help.png")
+        image: require("../../assets/images/help.png"),
+        callback: () => {
+          this._drawer.close(() => {
+            Actions.help();
+          });
+        }
       },
       {
         title: "Logout",
-        image: require("../../assets/images/logout.png")
+        image: require("../../assets/images/logout.png"),
+        callback: () => {
+          Actions.popTo("login");
+        }
       }
     ];
     return (
@@ -92,19 +146,14 @@ export default class Portfolio extends Component {
             menuRef={ref => {
               this._menu = ref;
             }}
-            menuList={[
-              { value: "Whitefield" },
-              { value: "Kasthuri Nagar" },
-              { value: "Hebbal" },
-              { value: "Hosur" }
-            ]}
+            menuList={dropDownList}
             showMenu={true}
           />
           {/* Header */}
 
           {/* Layout */}
           <PortfolioLayout
-            portfolioData={[{}, {}, {}, {}, {}, {}, {}, {}]}
+            portfolioData={data}
             callback={() => {
               Actions.harvest();
             }}

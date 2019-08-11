@@ -129,12 +129,18 @@ export default class LocationMap extends Component {
 
   finish() {
     const { polygons, editing } = this.state;
-    this.setState({
-      polygons: [...polygons, editing],
-      editing: null,
-      creatingHole: false,
-      isEdit: false
-    });
+    this.setState(
+      {
+        polygons: [...polygons, editing],
+        editing: null,
+        creatingHole: false,
+        isEdit: false,
+        isFreez: false
+      },
+      () => {
+        this.setState({ modalVisible: true });
+      }
+    );
   }
 
   deletePolygon() {
@@ -228,6 +234,10 @@ export default class LocationMap extends Component {
             Actions.pop();
           }}
           title="ICICI00XXX"
+          rightIcon={require("../../assets/images/home.png")}
+          rightIconCallback={() => {
+            Actions.popTo("portfolio");
+          }}
         />
         {/* Header */}
 

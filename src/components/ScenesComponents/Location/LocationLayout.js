@@ -62,8 +62,8 @@ export default class LocationLayout extends Component {
               tappable={true}
               coordinates={polygon.coordinates}
               holes={polygon.holes}
-              strokeColor="#F00"
-              fillColor="rgba(255,0,0,0.5)"
+              strokeColor="rgba(68,215,182,1)"
+              fillColor="rgba(68,215,182,0.52)"
               strokeWidth={1}
             />
           ))}
@@ -72,8 +72,8 @@ export default class LocationLayout extends Component {
               key={editing.id}
               coordinates={editing.coordinates}
               holes={editing.holes}
-              strokeColor="#000"
-              fillColor="rgba(255,0,0,0.5)"
+              strokeColor="rgba(68,215,182,1)"
+              fillColor="rgba(68,215,182,0.52)"
               strokeWidth={1}
             />
           )}
@@ -85,7 +85,7 @@ export default class LocationLayout extends Component {
           showDelete={isEdit}
           showFreez={isEdit}
         />
-        <View style={{ position: "absolute", bottom: 26, right: 20 }}>
+        <View style={{ position: "absolute", bottom: 66, right: 20 }}>
           <ZoomButton
             plusCallback={plusCallback}
             minusCallback={minusCallback}

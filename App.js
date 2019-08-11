@@ -6,6 +6,7 @@ import Portfolio from "./src/components/Scenes/Portfolio";
 import Harvest from "./src/components/Scenes/Harvest";
 import LocationMap from "./src/components/Scenes/LocationMap";
 import Chart from "./src/components/Scenes/Chart";
+import Help from "./src/components/Scenes/Help";
 
 console.disableYellowBox = true;
 
@@ -47,6 +48,13 @@ export default class App extends Component {
             hideNavBar={true}
             component={Chart}
             title="Chart"
+            panHandlers={null}
+          />
+          <Scene
+            key="help"
+            hideNavBar={true}
+            component={Help}
+            title="Help"
             panHandlers={null}
           />
         </Scene>

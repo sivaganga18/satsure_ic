@@ -68,10 +68,14 @@ export default class LocationModal extends Component {
                 showTouchField={true}
                 callback={dateCallback}
                 value={dateValue}
+                icon={require("../../../assets/images/calender.png")}
               />
               <AddPhoto callback={imageCallback} photosArray={imageArray} />
               <CustomTextField title="Created Date" />
-              <CustomTextField title="GPS Coordinates" />
+              <CustomTextField
+                title="GPS Coordinates"
+                icon={require("../../../assets/images/gps-light.png")}
+              />
             </View>
           </ScrollView>
           <View style={{ paddingTop: 16 }}>

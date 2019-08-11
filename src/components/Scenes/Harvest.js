@@ -9,6 +9,48 @@ import CustomStatusBar from "../Common/CustomStatusBar";
 import { Actions } from "react-native-router-flux";
 import HarvestLayout from "../ScenesComponents/Harvest/HarvestLayout";
 
+const data = [
+  {
+    assetCode: "ICICI0113297",
+    crops: ["Paddy", "Maize"],
+    areaFinanced: 1432553,
+    harvestWindow: "21-12-2019",
+    subPotential: "medium",
+    validationDone: false
+  },
+  {
+    assetCode: "ICICI013472982",
+    crops: ["Paddy", "Green Gram"],
+    areaFinanced: 1432553,
+    harvestWindow: "21-12-2019",
+    subPotential: "High",
+    validationDone: true
+  },
+  {
+    assetCode: "ICICI0113297",
+    crops: ["Black Gram"],
+    areaFinanced: 1432553,
+    harvestWindow: "21-12-2019",
+    subPotential: "Low",
+    validationDone: false
+  }
+];
+
+const dropDownList = [
+  {
+    name: "Akola",
+    id: 1
+  },
+  {
+    name: "Thane",
+    id: 2
+  },
+  {
+    name: "whitefield",
+    id: 3
+  }
+];
+
 export default class Harvest extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +68,7 @@ export default class Harvest extends Component {
   };
   render() {
     const { menuTitle } = this.state;
+
     return (
       <View style={{ flex: 1 }}>
         {/* Header */}
@@ -45,19 +88,14 @@ export default class Harvest extends Component {
           menuRef={ref => {
             this._menu = ref;
           }}
-          menuList={[
-            { value: "Whitefield" },
-            { value: "Kasthuri Nagar" },
-            { value: "Hebbal" },
-            { value: "Hosur" }
-          ]}
+          menuList={dropDownList}
           showMenu={true}
         />
         {/* Header */}
 
         {/* Layout */}
         <HarvestLayout
-          harvestData={[{}, {}, {}, {}, {}]}
+          harvestData={data}
           callback={() => {
             Actions.location();
           }}

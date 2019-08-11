@@ -6,10 +6,11 @@ import {
   typography,
   fontSizes
 } from "../../../../styles/StyleSheet";
+import { map } from "lodash";
 
 export default class HarvestCard extends Component {
   render() {
-    const { callback } = this.props;
+    const { callback, code, crops, area, date } = this.props;
     return (
       <View
         style={[
@@ -52,15 +53,22 @@ export default class HarvestCard extends Component {
               </Text>
             </View>
             <View style={{ paddingLeft: 8 }}>
-              <Text style={[typography.medium.large]}>ICICI00XXX</Text>
-              <Text
-                style={[
-                  typography.regular.small,
-                  { color: colors.textSecondaryLight, paddingTop: 4 }
-                ]}
-              >
-                Pulses, Wheat
-              </Text>
+              <Text style={[typography.medium.large]}>{code}</Text>
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                {map(crops, (c, key) => {
+                  return (
+                    <Text
+                      style={[
+                        typography.regular.small,
+                        { color: colors.textSecondaryLight, paddingTop: 4 }
+                      ]}
+                    >
+                      {c + ", "}
+                    </Text>
+                  );
+                })}
+              </View>
+
               <Text
                 style={[
                   typography.regular.xSmall,
@@ -124,7 +132,7 @@ export default class HarvestCard extends Component {
                   { color: colors.textSecondaryLight, paddingTop: 4 }
                 ]}
               >
-                21/10/2019
+                {date}
               </Text>
             </View>
           </View>
@@ -158,7 +166,7 @@ export default class HarvestCard extends Component {
                   { color: colors.textSecondaryLight, paddingTop: 4 }
                 ]}
               >
-                11.34 Ha
+                {area + " Ha"}
               </Text>
             </View>
           </View>
