@@ -12,6 +12,8 @@ import moment from "moment";
 import DateTimePicker from "react-native-modal-datetime-picker";
 
 const width = Dimensions.get("window").width;
+const LATITUDE_DELTA = 0.00922 * 0.4;
+const LONGITUDE_DELTA = 0.00421 * 0.4;
 
 let id = 0;
 
@@ -28,7 +30,14 @@ export default class LocationMap extends Component {
       photoPermission: "",
       imageArray: [],
       isDateTimePickerVisible: false,
-      dateValue: ""
+      dateValue: "",
+      isFreez: true,
+      region: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
     };
   }
 
@@ -37,6 +46,24 @@ export default class LocationMap extends Component {
       // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
       this.setState({ photoPermission: response });
     });
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log("wokeeey");
+        console.log(position);
+        this.setState({
+          region: {
+            ...this.state.region,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
+          },
+          error: null
+        });
+      },
+      error => this.setState({ error: error.message }),
+      { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 }
+    );
   }
 
   _requestPermission = () => {
@@ -152,7 +179,9 @@ export default class LocationMap extends Component {
       photoPermission,
       imageArray,
       isDateTimePickerVisible,
-      dateValue
+      dateValue,
+      region,
+      isFreez
     } = this.state;
     return (
       <View style={{ flex: 1 }}>
@@ -170,6 +199,8 @@ export default class LocationMap extends Component {
         <LocationLayout
           polygons={polygons}
           isEdit={isEdit}
+          region={region}
+          isFreez={isFreez}
           callback={e => {
             this.onPress(e);
           }}
@@ -182,7 +213,10 @@ export default class LocationMap extends Component {
             this.setState({ isEdit: true });
           }}
           deleteCallback={() => {
-            this.deletePolygon();
+            this.setState({ editing: null });
+          }}
+          freezCallback={() => {
+            this.setState({ isFreez: !this.state.isFreez });
           }}
         />
         {/* Layout */}

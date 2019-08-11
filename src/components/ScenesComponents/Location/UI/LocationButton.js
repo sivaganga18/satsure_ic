@@ -21,7 +21,7 @@ export default class LocationButton extends Component {
         {showDelete ? (
           <View style={{ paddingTop: 16 }}>
             <RoundButton
-              image={require("../../../../assets/images/delete.png")}
+              image={require("../../../../assets/images/delete_black.png")}
               callback={deleteCallback}
             />
           </View>
@@ -31,7 +31,7 @@ export default class LocationButton extends Component {
         <View style={{ paddingTop: 16 }}>
           {showFreez ? (
             <RoundButton
-              image={require("../../../../assets/images/delete.png")}
+              image={require("../../../../assets/images/stop.png")}
               callback={freezCallback}
             />
           ) : (

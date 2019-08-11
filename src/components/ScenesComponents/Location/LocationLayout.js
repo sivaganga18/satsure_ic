@@ -20,23 +20,32 @@ export default class LocationLayout extends Component {
       editing,
       editCallback,
       deleteCallback,
-      selectedPolygonCallback
+      selectedPolygonCallback,
+      region,
+      freezCallback,
+      isFreez
     } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <MapView
           style={{ width: "100%", height: "100%" }}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }}
+          mapType="satellite"
+          region={region}
+          zoomEnabled={isFreez}
+          scrollEnabled={isFreez}
+          rotateEnabled={isFreez}
+          followUserLocation={true}
+          zoomControlEnabled={true}
+          enableZoomControl={true}
+          zoom={1}
+          showcompass={true}
           onPress={e => {
             if (isEdit) {
               callback(e);
             }
           }}
+          showsMyLocationButton={true}
+          showsUserLocation={true}
         >
           {polygons.map(polygon => (
             <Polygon
@@ -66,6 +75,7 @@ export default class LocationLayout extends Component {
         <LocationButton
           editCallback={editCallback}
           deleteCallback={deleteCallback}
+          freezCallback={freezCallback}
           showDelete={isEdit}
           showFreez={isEdit}
         />

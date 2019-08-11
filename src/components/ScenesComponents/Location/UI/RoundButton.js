@@ -17,7 +17,7 @@ export default class RoundButton extends Component {
           justifyContent: "center"
         }}
       >
-        <Image style={{ width: 20, height: 20 }} source={image} />
+        <Image style={{ width: 16, height: 16 }} source={image} />
       </TouchableOpacity>
     );
   }
