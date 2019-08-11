@@ -83,7 +83,7 @@ export default class LocationMap extends Component {
       <View style={{ flex: 1 }}>
         {/* Header */}
         <AppHeader
-          leftIcon={require("../../assets/images/hamburger.png")}
+          leftIcon={require("../../assets/images/back.png")}
           leftIconCallback={() => {
             Actions.pop();
           }}

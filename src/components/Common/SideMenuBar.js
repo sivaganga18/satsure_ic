@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import CustomStatusBar from "./CustomStatusBar";
 import { typography, Custompadding, colors } from "../../styles/StyleSheet";
 import { map } from "lodash";
@@ -32,6 +32,13 @@ export default class SideMenuBar extends Component {
                   { flexDirection: "row", alignItems: "center" }
                 ]}
               >
+                <View style={{ paddingRight: 16 }}>
+                  <Image
+                    resizeMode="contain"
+                    style={{ width: 18, height: 18 }}
+                    source={menu.image}
+                  />
+                </View>
                 <Text style={[typography.regular.regular]}>{menu.title}</Text>
               </TouchableOpacity>
             );

@@ -39,13 +39,16 @@ export default class Portfolio extends Component {
           this._drawer.close(() => {
             Actions.chart();
           });
-        }
+        },
+        image: require("../../assets/images/chart.png")
       },
       {
-        title: "Help"
+        title: "Help",
+        image: require("../../assets/images/help.png")
       },
       {
-        title: "Logout"
+        title: "Logout",
+        image: require("../../assets/images/logout.png")
       }
     ];
     return (
@@ -74,7 +77,7 @@ export default class Portfolio extends Component {
         >
           {/* Header */}
           <AppHeader
-            leftIcon={require("../../assets/images/hamburger.png")}
+            leftIcon={require("../../assets/images/menu.png")}
             leftIconCallback={() => {
               this.openDrawer();
             }}

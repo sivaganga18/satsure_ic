@@ -44,7 +44,7 @@ export default class AppHeader extends Component {
             >
               <Image
                 resizeMode="contain"
-                style={{ width: 20, height: 20 }}
+                style={{ width: 15, height: 15 }}
                 source={leftIcon}
               />
             </TouchableOpacity>
@@ -59,7 +59,13 @@ export default class AppHeader extends Component {
               <Menu
                 ref={menuRef ? menuRef : "ref"}
                 button={
-                  <View style={{ paddingRight: 16, flexDirection: "row" }}>
+                  <View
+                    style={{
+                      paddingRight: 16,
+                      flexDirection: "row",
+                      alignItems: "center"
+                    }}
+                  >
                     <Text
                       style={[
                         typography.medium.medium,
@@ -69,6 +75,12 @@ export default class AppHeader extends Component {
                     >
                       {menuTitle}
                     </Text>
+                    <View style={{ paddingLeft: 4 }}>
+                      <Image
+                        style={{ width: 10, height: 10 }}
+                        source={require("../../assets/images/down.png")}
+                      />
+                    </View>
                   </View>
                 }
               >

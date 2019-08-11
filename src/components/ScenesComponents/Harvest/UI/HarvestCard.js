@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import {
   Custompadding,
   colors,
@@ -98,12 +98,20 @@ export default class HarvestCard extends Component {
               {
                 flex: 0.5,
                 borderRightWidth: 0.5,
+                flexDirection: "row",
                 borderRightColor: colors.borderColorGray,
                 alignItems: "center",
                 justifyContent: "center"
               }
             ]}
           >
+            <View style={{ paddingRight: 8 }}>
+              <Image
+                resizeMode="contain"
+                style={{ width: 18, height: 18 }}
+                source={require("../../../../assets/images/calender.png")}
+              />
+            </View>
             <View style={{ alignItems: "center" }}>
               <Text
                 style={[typography.medium.small, { color: colors.drakGreen }]}
@@ -123,9 +131,21 @@ export default class HarvestCard extends Component {
           <View
             style={[
               Custompadding.paddingRegular,
-              { flex: 0.5, alignItems: "center", justifyContent: "center" }
+              {
+                flex: 0.5,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center"
+              }
             ]}
           >
+            <View style={{ paddingRight: 8 }}>
+              <Image
+                resizeMode="contain"
+                style={{ width: 25, height: 25 }}
+                source={require("../../../../assets/images/mount.png")}
+              />
+            </View>
             <View style={{ alignItems: "center" }}>
               <Text
                 style={[typography.medium.small, { color: colors.drakGreen }]}
