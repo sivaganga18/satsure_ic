@@ -37,7 +37,8 @@ export default class LocationMap extends Component {
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
-      }
+      },
+      onChange: false
     };
   }
 
@@ -46,6 +47,10 @@ export default class LocationMap extends Component {
       // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
       this.setState({ photoPermission: response });
     });
+    this.getCurrentLocation();
+  }
+
+  getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
       position => {
         console.log("wokeeey");
@@ -58,7 +63,8 @@ export default class LocationMap extends Component {
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA
           },
-          error: null
+          error: null,
+          onChange: true
         });
       },
       error => this.setState({ error: error.message }),
@@ -74,6 +80,22 @@ export default class LocationMap extends Component {
       this.setState({ photoPermission: response });
     });
   };
+
+  zoomMap(zoom) {
+    debugger;
+    if (this.state.region.latitudeDelta >= 0) {
+      const updateRegion = zoom
+        ? this.state.region.latitudeDelta + 0.00922
+        : this.state.region.latitudeDelta - 0.00922;
+      this.setState({
+        region: {
+          ...this.state.region,
+          latitudeDelta: updateRegion <= -0 ? LATITUDE_DELTA : updateRegion
+        },
+        error: null
+      });
+    }
+  }
 
   selectPhotoTapped() {
     const options = {
@@ -170,6 +192,20 @@ export default class LocationMap extends Component {
     );
   };
 
+  onRegionChange = e => {
+    if (this.state.onChange) {
+      this.setState({
+        region: {
+          ...this.state.region,
+          latitude: e.latitude,
+          longitude: e.longitude,
+          latitudeDelta: this.state.region.latitudeDelta,
+          longitudeDelta: this.state.region.longitudeDelta
+        }
+      });
+    }
+  };
+
   render() {
     const {
       polygons,
@@ -204,6 +240,7 @@ export default class LocationMap extends Component {
           callback={e => {
             this.onPress(e);
           }}
+          onRegionChangeComplete={this.onRegionChange}
           selectedPolygonCallback={id => {
             // this.setState({ selectedPolygon: id });
             this.setState({ modalVisible: true });
@@ -217,6 +254,15 @@ export default class LocationMap extends Component {
           }}
           freezCallback={() => {
             this.setState({ isFreez: !this.state.isFreez });
+          }}
+          plusCallback={() => {
+            this.zoomMap(1);
+          }}
+          minusCallback={() => {
+            this.zoomMap(0);
+          }}
+          gpsCallback={() => {
+            this.getCurrentLocation();
           }}
         />
         {/* Layout */}

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import MapView, { Polygon, ProviderPropType } from "react-native-maps";
 import LocationButton from "./UI/LocationButton";
 import { colors, typography } from "../../../styles/StyleSheet";
+import ZoomButton from "./UI/ZoomButton";
 
 let id = 0;
 
@@ -23,7 +24,11 @@ export default class LocationLayout extends Component {
       selectedPolygonCallback,
       region,
       freezCallback,
-      isFreez
+      isFreez,
+      plusCallback,
+      minusCallback,
+      onRegionChangeComplete,
+      gpsCallback
     } = this.props;
     return (
       <View style={{ flex: 1 }}>
@@ -31,13 +36,14 @@ export default class LocationLayout extends Component {
           style={{ width: "100%", height: "100%" }}
           mapType="satellite"
           region={region}
+          initialRegion={region}
           zoomEnabled={isFreez}
           scrollEnabled={isFreez}
           rotateEnabled={isFreez}
+          onRegionChangeComplete={onRegionChangeComplete}
           followUserLocation={true}
           zoomControlEnabled={true}
           enableZoomControl={true}
-          zoom={1}
           showcompass={true}
           onPress={e => {
             if (isEdit) {
@@ -79,6 +85,13 @@ export default class LocationLayout extends Component {
           showDelete={isEdit}
           showFreez={isEdit}
         />
+        <View style={{ position: "absolute", bottom: 26, right: 20 }}>
+          <ZoomButton
+            plusCallback={plusCallback}
+            minusCallback={minusCallback}
+            gpsCallback={gpsCallback}
+          />
+        </View>
         {isEdit ? (
           <View style={{ position: "absolute", width: "100%" }}>
             <View
