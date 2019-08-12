@@ -12,6 +12,7 @@ import Modal from "react-native-modal";
 import CustomTextField from "../../Common/CustomTextField";
 import Button from "../../Common/Button";
 import AddPhoto from "./UI/AddPhoto";
+import ValidationButton from "./UI/ValidationButton";
 
 const height = Dimensions.get("window").height;
 
@@ -24,7 +25,10 @@ export default class LocationModal extends Component {
       closeCallback,
       proccedCallback,
       dateCallback,
-      dateValue
+      dateValue,
+      validationCallback,
+      validationList,
+      validationActiveTab
     } = this.props;
     return (
       <Modal isVisible={visible}>
@@ -71,6 +75,13 @@ export default class LocationModal extends Component {
                 icon={require("../../../assets/images/calender.png")}
               />
               <AddPhoto callback={imageCallback} photosArray={imageArray} />
+              <ValidationButton
+                list={validationList}
+                activeTab={validationActiveTab}
+                callback={key => {
+                  validationCallback(key);
+                }}
+              />
               <CustomTextField title="Created Date" />
               <CustomTextField
                 title="GPS Coordinates"

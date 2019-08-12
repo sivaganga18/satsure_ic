@@ -81,6 +81,7 @@ export default class LocationLayout extends Component {
         <LocationButton
           editCallback={editCallback}
           deleteCallback={deleteCallback}
+          isFreez={isFreez}
           freezCallback={freezCallback}
           showDelete={isEdit}
           showFreez={isEdit}

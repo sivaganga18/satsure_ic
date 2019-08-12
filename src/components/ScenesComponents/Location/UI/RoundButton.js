@@ -4,7 +4,7 @@ import { colors } from "../../../../styles/StyleSheet";
 
 export default class RoundButton extends Component {
   render() {
-    const { callback, image } = this.props;
+    const { callback, image, backgroundColor } = this.props;
     return (
       <TouchableOpacity
         onPress={callback}
@@ -12,7 +12,7 @@ export default class RoundButton extends Component {
           width: 40,
           height: 40,
           borderRadius: 40 / 2,
-          backgroundColor: colors.white,
+          backgroundColor: backgroundColor ? backgroundColor : colors.white,
           alignItems: "center",
           justifyContent: "center"
         }}

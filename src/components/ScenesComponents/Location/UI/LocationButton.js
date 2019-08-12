@@ -10,7 +10,8 @@ export default class LocationButton extends Component {
       deleteCallback,
       freezCallback,
       showDelete,
-      showFreez
+      showFreez,
+      isFreez
     } = this.props;
     return (
       <View style={{ position: "absolute", right: 16, top: 80 }}>
@@ -33,6 +34,7 @@ export default class LocationButton extends Component {
             <RoundButton
               image={require("../../../../assets/images/stop.png")}
               callback={freezCallback}
+              backgroundColor={isFreez ? colors.white : colors.pink}
             />
           ) : (
             <View />

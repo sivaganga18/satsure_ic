@@ -17,9 +17,12 @@ export default class HarvestLayout extends Component {
                 <HarvestCard
                   code={harvest.assetCode}
                   crops={harvest.crops}
+                  showDot={harvest && harvest.polygon ? harvest.polygon : false}
                   area={harvest.areaFinanced}
                   date={harvest.harvestWindow}
-                  callback={callback}
+                  callback={() => {
+                    callback(harvest);
+                  }}
                 />
               );
             })}

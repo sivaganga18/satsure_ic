@@ -17,11 +17,21 @@ const LONGITUDE_DELTA = 0.00421 * 0.4;
 
 let id = 0;
 
+const validationList = [
+  {
+    background: "#E02020"
+  },
+  {
+    background: "#00C853"
+  }
+];
+
 export default class LocationMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      polygons: [],
+      polygons:
+        props.mapData && props.mapData.polygon ? props.mapData.polygon : [],
       editing: null,
       creatingHole: false,
       isEdit: false,
@@ -33,12 +43,19 @@ export default class LocationMap extends Component {
       dateValue: "",
       isFreez: true,
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
+        latitude:
+          props.mapData && props.mapData.latitude
+            ? props.mapData.latitude
+            : 37.78825,
+        longitude:
+          props.mapData && props.mapData.longitude
+            ? props.mapData.longitude
+            : -122.4324,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
       },
-      onChange: false
+      onChange: false,
+      validationActiveTab: null
     };
   }
 
@@ -135,7 +152,7 @@ export default class LocationMap extends Component {
         editing: null,
         creatingHole: false,
         isEdit: false,
-        isFreez: false
+        isFreez: true
       },
       () => {
         this.setState({ modalVisible: true });
@@ -205,8 +222,8 @@ export default class LocationMap extends Component {
           ...this.state.region,
           latitude: e.latitude,
           longitude: e.longitude,
-          latitudeDelta: this.state.region.latitudeDelta,
-          longitudeDelta: this.state.region.longitudeDelta
+          latitudeDelta: e.latitudeDelta,
+          longitudeDelta: e.longitudeDelta
         }
       });
     }
@@ -223,8 +240,10 @@ export default class LocationMap extends Component {
       isDateTimePickerVisible,
       dateValue,
       region,
-      isFreez
+      isFreez,
+      validationActiveTab
     } = this.state;
+
     return (
       <View style={{ flex: 1 }}>
         {/* Header */}
@@ -233,7 +252,7 @@ export default class LocationMap extends Component {
           leftIconCallback={() => {
             Actions.pop();
           }}
-          title="ICICI00XXX"
+          title={this.props.mapData.assetCode}
           rightIcon={require("../../assets/images/home.png")}
           rightIconCallback={() => {
             Actions.popTo("portfolio");
@@ -319,6 +338,11 @@ export default class LocationMap extends Component {
             });
           }}
           dateValue={dateValue}
+          validationCallback={key => {
+            this.setState({ validationActiveTab: key });
+          }}
+          validationList={validationList}
+          validationActiveTab={validationActiveTab}
         />
         {/* LocationModal */}
         <DateTimePicker

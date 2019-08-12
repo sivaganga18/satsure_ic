@@ -10,7 +10,7 @@ import { map } from "lodash";
 
 export default class HarvestCard extends Component {
   render() {
-    const { callback, code, crops, area, date } = this.props;
+    const { callback, code, crops, area, date, showDot } = this.props;
     return (
       <View
         style={[
@@ -33,24 +33,40 @@ export default class HarvestCard extends Component {
           ]}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View
-              style={{
-                width: 45,
-                height: 45,
-                borderRadius: 45 / 2,
-                backgroundColor: colors.yellow,
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <Text
-                style={[
-                  typography.medium.medium,
-                  { ...fontSizes.xlarge, color: colors.white }
-                ]}
+            <View>
+              <View
+                style={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 45 / 2,
+                  backgroundColor: colors.yellow,
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
               >
-                S
-              </Text>
+                <Text
+                  style={[
+                    typography.medium.medium,
+                    { ...fontSizes.xlarge, color: colors.white }
+                  ]}
+                >
+                  S
+                </Text>
+              </View>
+              {showDot ? (
+                <View style={{ position: "absolute", right: 1, top: 4 }}>
+                  <View
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: 8 / 2,
+                      backgroundColor: colors.drakGreen
+                    }}
+                  />
+                </View>
+              ) : (
+                <View />
+              )}
             </View>
             <View style={{ paddingLeft: 8 }}>
               <Text style={[typography.medium.large]}>{code}</Text>

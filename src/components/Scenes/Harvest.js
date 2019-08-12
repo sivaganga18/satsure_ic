@@ -16,7 +16,33 @@ const data = [
     areaFinanced: 1432553,
     harvestWindow: "21-12-2019",
     subPotential: "medium",
-    validationDone: false
+    validationDone: false,
+    latitude: 20.59532258852144,
+    longitude: 78.9627884969202,
+    polygon: [
+      {
+        id: 0,
+        holes: [],
+        coordinates: [
+          {
+            latitude: 20.59532258852144,
+            longitude: 78.9627884969202
+          },
+          {
+            latitude: 20.595148626962683,
+            longitude: 78.96365687065672
+          },
+          {
+            latitude: 20.59617974166713,
+            longitude: 78.96384946716638
+          },
+          {
+            latitude: 20.596271466257093,
+            longitude: 78.9630655655832
+          }
+        ]
+      }
+    ]
   },
   {
     assetCode: "ICICI013472982",
@@ -55,7 +81,7 @@ export default class Harvest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuTitle: "WhiteField"
+      menuTitle: dropDownList[0].name
     };
   }
   hideMenu = value => {
@@ -96,8 +122,8 @@ export default class Harvest extends Component {
         {/* Layout */}
         <HarvestLayout
           harvestData={data}
-          callback={() => {
-            Actions.location();
+          callback={data => {
+            Actions.location({ mapData: data });
           }}
         />
         {/* Layout */}
