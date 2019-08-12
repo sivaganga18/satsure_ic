@@ -62,8 +62,8 @@ export default class LocationLayout extends Component {
               tappable={true}
               coordinates={polygon.coordinates}
               holes={polygon.holes}
-              strokeColor="rgba(68,215,182,1)"
-              fillColor="rgba(68,215,182,0.52)"
+              strokeColor="rgba(255,159,94,1)"
+              fillColor="rgba(255,159,94,0.52)"
               strokeWidth={1}
             />
           ))}
