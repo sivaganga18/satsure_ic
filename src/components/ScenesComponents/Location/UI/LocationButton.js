@@ -34,7 +34,7 @@ export default class LocationButton extends Component {
             <RoundButton
               image={require("../../../../assets/images/stop.png")}
               callback={freezCallback}
-              backgroundColor={isFreez ? colors.white : colors.pink}
+              backgroundColor={isFreez ? colors.white : colors.orange}
             />
           ) : (
             <View />

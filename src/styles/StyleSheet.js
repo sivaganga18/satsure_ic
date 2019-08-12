@@ -19,7 +19,7 @@ export const colors = {
   pink: "#FA114F",
   pinkLight: "rgba(233,30,99,0.2)",
   blueMedium: "rgba(0,218,255,0.2)",
-  blueLight: "rgba(32,148,250,0.2)"
+  blueLight: "rgba(32,148,250,0.2)",
 };
 
 export const fonts = {
