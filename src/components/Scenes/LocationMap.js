@@ -64,7 +64,9 @@ export default class LocationMap extends Component {
       // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
       this.setState({ photoPermission: response });
     });
-    this.getCurrentLocation();
+    if (this.props.mapData && !this.props.mapData.polygon) {
+      this.getCurrentLocation();
+    }
   }
 
   getCurrentLocation() {
