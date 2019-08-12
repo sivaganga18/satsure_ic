@@ -82,7 +82,7 @@ export default class LocationModal extends Component {
                   validationCallback(key);
                 }}
               />
-              <CustomTextField title="Created Date" />
+              <CustomTextField title="Created Date" value="13-08-2019" />
               <CustomTextField
                 title="GPS Coordinates"
                 icon={require("../../../assets/images/gps-light.png")}
