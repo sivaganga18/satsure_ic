@@ -51,13 +51,14 @@ export default class PortfolioCard extends Component {
             </Text>
           </View>
         </View>
-        <View style={[Custompadding.paddingRegular]}>
+        <View style={{ padding: 16, paddingTop: 10, paddingBottom: 10 }}>
+          {/* {padding:16, paddingTop: 10, paddingBottom: 10} */}
           <Text
             style={[
               typography.regular.small,
               { color: colors.textSecondaryLight }
             ]}
-          >{`Total LAN - ₹${lan ? lan : 0}`}</Text>
+          >{`Total #LAN - ${lan ? lan : 0}`}</Text>
           <Text
             style={[
               typography.regular.small,

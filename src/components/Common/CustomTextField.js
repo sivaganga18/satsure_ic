@@ -10,7 +10,8 @@ export default class CustomTextField extends Component {
       showTouchField,
       callback,
       value,
-      icon
+      icon,
+      secureTextEntry
     } = this.props;
     return (
       <View>
@@ -43,6 +44,7 @@ export default class CustomTextField extends Component {
               editable={showTouchField ? false : true}
               placeholder={placeholder}
               underlineColorAndroid="transparent"
+              secureTextEntry={secureTextEntry}
             />
             {icon ? (
               <View

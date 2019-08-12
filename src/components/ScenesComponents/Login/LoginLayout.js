@@ -47,7 +47,7 @@ export default class LoginLayout extends Component {
         {/* TextField */}
         <View>
           <CustomTextField placeholder="Username" />
-          <CustomTextField placeholder="Password" />
+          <CustomTextField placeholder="Password" secureTextEntry={true}  />
         </View>
         {/* TextField */}
 
