@@ -10,7 +10,7 @@ export default class AddPhoto extends Component {
     return (
       <View>
         <View style={{ paddingBottom: 8, marginTop: 26 }}>
-          <Text style={[typography.medium.regular]}>Image*</Text>
+          <Text style={[typography.medium.regular]}>Image<Text style={{ color: '#E02020' }}>*</Text></Text>
         </View>
         <TouchableOpacity
           onPress={callback}
