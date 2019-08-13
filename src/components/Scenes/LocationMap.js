@@ -10,6 +10,7 @@ import ImagePicker from "react-native-image-picker";
 import Permissions from "react-native-permissions";
 import moment from "moment";
 import DateTimePicker from "react-native-modal-datetime-picker";
+import ToastMessage from "../Common/ToastMessage";
 
 const width = Dimensions.get("window").width;
 const LATITUDE_DELTA = 0.00922 * 0.4;
@@ -55,7 +56,8 @@ export default class LocationMap extends Component {
         longitudeDelta: LONGITUDE_DELTA
       },
       onChange: false,
-      validationActiveTab: null
+      validationActiveTab: null,
+      showToast: false
     };
   }
 
@@ -243,7 +245,8 @@ export default class LocationMap extends Component {
       dateValue,
       region,
       isFreez,
-      validationActiveTab
+      validationActiveTab,
+      showToast
     } = this.state;
 
     return (
@@ -329,7 +332,13 @@ export default class LocationMap extends Component {
             this.setState({ modalVisible: false });
           }}
           proccedCallback={() => {
-            this.setState({ dateValue: "", modalVisible: false });
+            this.setState({ dateValue: "", modalVisible: false }, () => {
+              this.setState({ showToast: true }, () => {
+                setTimeout(() => {
+                  this.setState({ showToast: false });
+                }, 1500);
+              });
+            });
           }}
           dateCallback={() => {
             debugger;
@@ -354,6 +363,11 @@ export default class LocationMap extends Component {
             this.setState({ isDateTimePickerVisible: false });
           }}
         />
+        {showToast ? (
+          <ToastMessage message="Successfully Submmited" />
+        ) : (
+          <View />
+        )}
       </View>
     );
   }

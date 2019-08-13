@@ -18,6 +18,7 @@ export default class LocationButton extends Component {
         <RoundButton
           image={require("../../../../assets/images/edit.png")}
           callback={editCallback}
+          backgroundColor={showDelete ? colors.orange : colors.white}
         />
         {showDelete ? (
           <View style={{ paddingTop: 16 }}>
