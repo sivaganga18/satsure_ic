@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import MapView, { Polygon, ProviderPropType } from "react-native-maps";
+import MapView, { Polygon, Marker } from "react-native-maps";
 import LocationButton from "./UI/LocationButton";
 import { colors, typography } from "../../../styles/StyleSheet";
 import ZoomButton from "./UI/ZoomButton";
@@ -53,6 +53,20 @@ export default class LocationLayout extends Component {
           showsMyLocationButton={true}
           showsUserLocation={true}
         >
+          {editing &&
+            editing.coordinates &&
+            editing.coordinates.map((coordinate, index) => (
+              <Marker key={index} coordinate={coordinate} onDragEnd={() => {}}>
+                <View
+                  style={{
+                    backgroundColor: "rgba(68,215,182,1)",
+                    width: 10,
+                    height: 10,
+                    borderRadius: 10 / 2
+                  }}
+                />
+              </Marker>
+            ))}
           {polygons.map(polygon => (
             <Polygon
               key={polygon.id}
@@ -67,6 +81,7 @@ export default class LocationLayout extends Component {
               strokeWidth={1}
             />
           ))}
+
           {editing && (
             <Polygon
               key={editing.id}
